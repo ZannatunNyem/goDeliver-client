@@ -11,7 +11,7 @@
   --color-accent: oklch(0.5941 0.0045 286.26);
   /* --color-base-100: oklch(0.5941 0.0045 286.26); */
   --color-base-100: oklch(0.9882 0.0045 286.26);
-  --color-base-200: oklch(0.1985 0.0099 38.65);
+  --color-base-200: oklch(0.2397 0.0099 38.65);
 }
 
 body {

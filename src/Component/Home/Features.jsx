@@ -26,10 +26,13 @@ export default function Features() {
   ];
 
   return (
-    <section className="py-16 bg-gray-100">
-      <div className="max-w-6xl text-base-200 mx-auto px-4 grid gap-8 md:grid-cols-2 lg:grid-cols-4 text-center">
+    <section className="py-20 mt-5">
+      <h2 className="text-4xl  font-semibold text-center mb-15">
+        How it Works
+      </h2>
+      <div className="max-w-6xl text-base-200  mx-auto px-4 grid gap-8 md:grid-cols-2 lg:grid-cols-4 text-center">
         {features.map((item, index) => (
-          <div key={index} className=" p-6 rounded-2xl">
+          <div key={index} className=" p-6 rounded-2xl shadow-xl bg-gray-200">
             <div className="flex justify-center  mb-4">{item.icon}</div>
 
             <h3 className="text-lg font-semibold mb-2">{item.title}</h3>

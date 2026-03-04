@@ -1,6 +1,14 @@
 import React from "react";
 import loginImage from "../../assets/img/loginMan.webp";
-export default function LoginPage() {
+import { useForm } from "react-hook-form";
+export default function Login() {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const onSubmit = (data) => console.log(data);
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/*image */}
@@ -11,21 +19,28 @@ export default function LoginPage() {
           className="max-w-full h-auto rounded-lg "
         />
       </div>
+
       {/*Form */}
       <div className="flex-1 flex items-center justify-center md:justify-start bg-base-100 p-8">
         <div className="w-full max-w-md">
           <h2 className="text-3xl font-bold mb-6 text-center">Login</h2>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label className="block mb-1 font-medium" htmlFor="email">
                 Email
               </label>
               <input
+                {...register("email", {
+                  required: true,
+                })}
                 type="email"
                 id="email"
                 placeholder="email@example.com"
                 className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
+              {errors.email?.type === "required" && (
+                <p className="text-primary">Email is required</p>
+              )}
             </div>
 
             <div>
@@ -33,11 +48,17 @@ export default function LoginPage() {
                 Password
               </label>
               <input
+                {...register("password", {
+                  required: true,
+                })}
                 type="password"
                 id="password"
                 placeholder="********"
                 className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
+              {errors.password?.type === "required" && (
+                <p className="text-primary">Password is required</p>
+              )}
             </div>
 
             <button

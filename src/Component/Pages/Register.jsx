@@ -3,6 +3,8 @@ import loginImage from "../../assets/img/registerMan.webp";
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import GoogleLogIn from "../GoogleLogIn/GoogleLogIn";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const {
@@ -12,15 +14,27 @@ export default function Register() {
   } = useForm();
 
   const { createUser } = useAuth();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password)
       .then((result) => {
         console.log(result);
+        Swal.fire({
+          title: "Successly Logged in!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       });
   };
   return (

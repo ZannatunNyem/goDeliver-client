@@ -21,7 +21,9 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.13.1",
     "react-slick": "^0.31.0",
+    "react-toastify": "^11.0.5",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.26.21",
     "swiper": "^12.1.2",
     "tailwindcss": "^4.2.1"
   },

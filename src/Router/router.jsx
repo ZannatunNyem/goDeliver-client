@@ -4,6 +4,8 @@ import Home from "../Component/Pages/Home";
 import About from "../Component/Pages/About";
 import Login from "../Component/Pages/Login";
 import Register from "../Component/Pages/Register";
+import PrivateRoute from "./PrivateRoute";
+import SendParcel from "../Component/Pages/SendParcel";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/sendParcel",
+        element: (
+          <PrivateRoute>
+            <SendParcel></SendParcel>
+          </PrivateRoute>
+        ),
       },
     ],
   },

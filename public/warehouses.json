@@ -1,0 +1,10 @@
+[
+  { "id": 1, "region": "Dhaka", "city": "Mirpur" },
+  { "id": 2, "region": "Dhaka", "city": "Uttara" },
+  { "id": 3, "region": "Chattogram", "city": "Pahartali" },
+  { "id": 4, "region": "Chattogram", "city": "Agrabad" },
+  { "id": 5, "region": "Khulna", "city": "Daulatpur" },
+  { "id": 6, "region": "Khulna", "city": "Khalishpur" },
+  { "id": 7, "region": "Rajshahi", "city": "Boalia" },
+  { "id": 8, "region": "Rajshahi", "city": "Shaheb Bazar" }
+]

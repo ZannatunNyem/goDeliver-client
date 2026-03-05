@@ -1,6 +1,10 @@
 import React from "react";
 import loginImage from "../../assets/img/loginMan.webp";
 import { useForm } from "react-hook-form";
+import GoogleLogIn from "../GoogleLogIn/GoogleLogIn";
+import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
   const {
     register,
@@ -8,7 +12,30 @@ export default function Login() {
     handleSubmit,
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const { signInUser } = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    console.log(data);
+
+    signInUser(data.email, data.password)
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          title: "Successly Logged in!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      });
+  };
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/*image */}
@@ -73,6 +100,8 @@ export default function Login() {
             <a href="/register" className="text-primary hover:underline">
               Register
             </a>
+            <p>OR</p>
+            <GoogleLogIn></GoogleLogIn>
           </p>
         </div>
       </div>

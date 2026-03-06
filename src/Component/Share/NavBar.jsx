@@ -21,9 +21,17 @@ export default function NavBar() {
       <li>
         <NavLink to={"/"}>Home</NavLink>
       </li>
-      <li>
-        <NavLink to={"/sendParcel"}>Send Parcel</NavLink>
-      </li>
+
+      {user && (
+        <>
+          <li>
+            <NavLink to={"/sendParcel"}>Send Parcel</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/dashboard"}>Dashboard</NavLink>
+          </li>
+        </>
+      )}
       <li>
         <NavLink to={"/about"}>About</NavLink>
       </li>

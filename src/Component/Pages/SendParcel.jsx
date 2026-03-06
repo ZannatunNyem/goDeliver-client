@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
-// import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const generateTrackingID = () => {
   const data = new Date();
@@ -14,9 +14,9 @@ const generateTrackingID = () => {
 export default function AddParcel() {
   const { register, handleSubmit, watch, reset } = useForm();
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const parcelType = watch("parcelType");
 
-  // const navigate = useNavigate();
   const calculateCost = (data) => {
     const type = data.parcelType;
     const weight = Number(data.parcelWeight);
@@ -75,17 +75,24 @@ export default function AddParcel() {
               creation_date: new Date().toISOString(),
               tracking_id: generateTrackingID(),
             };
-            //  navigate("/payment", { state: { parcelData } });
+
             console.log("Ready for payment:", parcelData);
 
             // server
+            axiosSecure.post("/parcels", parcelData).then((res) => {
+              console.log(res.data);
+              if (res.data.insertedId) {
+                //redirect.........
 
-            Swal.fire({
-              icon: "success",
-              title: "Redirecting to Payment...",
-              timer: 1500,
-              showConfirmButton: false,
+                Swal.fire({
+                  icon: "success",
+                  title: "Redirecting to Payment...",
+                  timer: 1500,
+                  showConfirmButton: false,
+                });
+              }
             });
+
             // Here you can navigate to payment page
             // e.g., navigate("/payment") if using react-router
             reset(); // reset form after confirming

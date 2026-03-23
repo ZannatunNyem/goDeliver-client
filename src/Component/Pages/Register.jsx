@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import loginImage from "../../assets/img/registerMan.webp";
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import GoogleLogIn from "../GoogleLogIn/GoogleLogIn";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import useAxios from "../Hooks/useAxios";
 
 export default function Register() {
   const {
@@ -13,14 +15,41 @@ export default function Register() {
     handleSubmit,
   } = useForm();
 
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
+  const [profilePic, setProfilePic] = useState("");
+  const axiosInstance = useAxios();
 
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password)
-      .then((result) => {
+      .then(async (result) => {
         console.log(result);
+
+        const userInfo = {
+          email: data.email,
+          role: "user",
+          created_at: new Date().toISOString(),
+          last_log_in: new Date().toISOString(),
+        };
+        const userRes = await axiosInstance.post("/users", userInfo);
+        console.log(userRes.data);
+        //update profile
+
+        const userProfile = {
+          displayName: data.name,
+          photoURL: profilePic,
+        };
+        updateUserProfile(userProfile)
+          //update profile
+
+          .then(() => {
+            console.log("profile pic updated");
+          })
+          .catch((error) => {
+            console.log("here is profile pic ");
+          });
+
         Swal.fire({
           title: "Successly Logged in!",
           icon: "success",
@@ -37,9 +66,21 @@ export default function Register() {
         });
       });
   };
+
+  const handleUplodeImage = async (e) => {
+    const image = e.target.files[0];
+    console.log(image);
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const photoURL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_uplode}`;
+
+    const res = await axios.post(photoURL, formData);
+    console.log(res.data.data.url);
+  };
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      {/*image */}
+      {/*..image.. */}
       <div className="flex-1 hidden md:flex items-center justify-center bg-blue-50 p-8">
         <img
           src={loginImage}
@@ -48,7 +89,6 @@ export default function Register() {
         />
       </div>
 
-      {/*form */}
       <div className="flex-1 flex items-center justify-center md:justify-start bg-base-100 p-8">
         <div className="w-full max-w-md">
           <h2 className="text-3xl font-bold mb-6 text-center">Register</h2>
@@ -67,6 +107,20 @@ export default function Register() {
               {errors.name?.type === "required" && (
                 <p className="text-primary">Name is required</p>
               )}
+            </div>
+
+            {/* ..image.. */}
+
+            <div>
+              <label className="block mb-1 font-medium" htmlFor="email">
+                Photo
+              </label>
+              <input
+                onChange={handleUplodeImage}
+                type="file"
+                placeholder="your photo"
+                className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
             </div>
 
             <div>

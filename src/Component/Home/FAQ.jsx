@@ -4,7 +4,7 @@ export default function FAQ() {
   return (
     <section className="py-20 bg-base-200">
       <div className="max-w-4xl mx-auto px-4">
-        {/* Header */}
+        {/* ..Header.. */}
         <div className="text-center mb-14">
           <h2 className="text-4xl text-secondary font-bold mb-4">
             Frequently Asked Questions
@@ -15,7 +15,7 @@ export default function FAQ() {
           </p>
         </div>
 
-        {/* FAQ Items */}
+        {/* ..FAQ.. */}
         <div className="space-y-4">
           <div className="collapse collapse-plus bg-base-100 rounded-xl shadow-md">
             <input type="radio" name="faq-accordion" defaultChecked />

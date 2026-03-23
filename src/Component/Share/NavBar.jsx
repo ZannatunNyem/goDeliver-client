@@ -28,7 +28,7 @@ export default function NavBar() {
             <NavLink to={"/sendParcel"}>Send Parcel</NavLink>
           </li>
           <li>
-            <NavLink to={"/dashboard"}>Dashboard</NavLink>
+            <NavLink to={"/dashboard/mydashboard"}>Dashboard</NavLink>
           </li>
         </>
       )}

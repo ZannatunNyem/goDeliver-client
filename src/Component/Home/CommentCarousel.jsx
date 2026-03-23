@@ -27,7 +27,7 @@ export default function CommentCarousel() {
               </p>
             </div>
 
-            {/* User Info */}
+            {/* ...User... */}
             <div className="mt-4 flex items-center">
               <img
                 src="https://randomuser.me/api/portraits/women/44.jpg"
@@ -70,7 +70,7 @@ export default function CommentCarousel() {
         </SwiperSlide>
         <SwiperSlide>
           <div className="bg-gray-100 shadow-2xl rounded-2xl p-8 text-center max-w-sm mx-auto">
-            {/* Quote Section */}
+            {/* ..Section.. */}
             <div className="border-b border-dotted border-gray-300 pb-4 mb-4">
               <div className="flex justify-center text-2xl text-gray-400 mb-2">
                 <SiComma className="mr-1" />
@@ -81,7 +81,7 @@ export default function CommentCarousel() {
               </p>
             </div>
 
-            {/* User Info */}
+            {/* ..User.. */}
             <div className="mt-4 flex items-center">
               <img
                 src="https://randomuser.me/api/portraits/women/68.jpg"

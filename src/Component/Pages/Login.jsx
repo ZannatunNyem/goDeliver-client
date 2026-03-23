@@ -38,7 +38,7 @@ export default function Login() {
   };
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      {/*image */}
+      {/*..image.. */}
       <div className="flex-1 hidden md:flex items-center justify-center bg-blue-50 p-8">
         <img
           src={loginImage}
@@ -47,7 +47,6 @@ export default function Login() {
         />
       </div>
 
-      {/*Form */}
       <div className="flex-1 flex items-center justify-center md:justify-start bg-base-100 p-8">
         <div className="w-full max-w-md">
           <h2 className="text-3xl font-bold mb-6 text-center">Login</h2>

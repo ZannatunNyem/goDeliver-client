@@ -7,7 +7,11 @@ export default function PrivateRoute({ children }) {
   const location = useLocation();
 
   if (loading) {
-    return <span className="loading loading-spinner loading-lg"></span>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
   }
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;

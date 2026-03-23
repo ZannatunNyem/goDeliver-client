@@ -3,20 +3,30 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-
+import { Link } from "react-router-dom";
+import { FaTrash, FaCreditCard } from "react-icons/fa";
 export default function MyDashboard() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: parcels = [] } = useQuery({
-    queryKey: ["my-parcels", user.email],
+  const {
+    data: parcels = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["my-parcels", user?.email],
+    enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/parcels?email=${user.email}`);
+      const res = await axiosSecure.get(`/parcels?email=${user.email}`, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
       return res.data;
     },
   });
   console.log(parcels);
 
-  const handleDelete = () => {
+  const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -28,20 +38,36 @@ export default function MyDashboard() {
     }).then((result) => {
       if (result.isConfirmed) {
         // deleted
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
+
+        fetch(`http://localhost:5000/parcels/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          });
       }
     });
   };
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[60vh]">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
   return (
     <div className="w-full overflow-x-auto">
       <table className="table table-zebra w-full ">
         <thead className="bg-gray-300">
           <tr>
             <th>No</th>
+            <th>Title</th>
             <th>Type</th>
             <th>Create Date</th>
             <th>Cost</th>
@@ -56,19 +82,22 @@ export default function MyDashboard() {
               key={parcel._id}
               className={index % 2 === 0 ? "bg-base-100" : "bg-gray-200"}
             >
-              {/* Index */}
+              {/* ..index.. */}
               <td>{index + 1}</td>
 
-              {/* Type */}
+              {/* ..title.. */}
+              <td>{parcel.parcelName}</td>
+
+              {/* ..type.. */}
               <td>{parcel.parcelType}</td>
 
-              {/* Creation Date */}
+              {/* ..Date.. */}
               <td>{new Date(parcel.creation_date).toLocaleDateString()}</td>
 
-              {/* Cost */}
+              {/* ..cost.. */}
               <td>৳{parcel.cost}</td>
 
-              {/* Payment Status */}
+              {/* ..Payment.. */}
               <td>
                 <span
                   className={`badge ${
@@ -81,22 +110,19 @@ export default function MyDashboard() {
                 </span>
               </td>
 
-              {/* Buttons */}
-              <td className="flex gap-2">
-                <button className="btn btn-info btn-xs">View</button>
-
-                <button
-                  className="btn btn-success btn-xs"
-                  disabled={parcel.payment_status === "paid"}
-                >
-                  Pay
-                </button>
+              {/* ..buttons.. */}
+              <td className="flex items-center gap-3">
+                <Link to={`/dashboard/payment/${parcel._id}`}>
+                  <button className="btn btn-sm btn-outline border-blue-300 text-blue-500 hover:bg-blue-300 hover:text-blue-900 flex items-center gap-1">
+                    <FaCreditCard /> Pay
+                  </button>
+                </Link>
 
                 <button
                   onClick={() => handleDelete(parcel._id)}
-                  className="btn btn-error btn-xs"
+                  className="btn btn-sm btn-outline btn-error flex items-center gap-1"
                 >
-                  Delete
+                  <FaTrash /> Delete
                 </button>
               </td>
             </tr>

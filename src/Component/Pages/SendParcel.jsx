@@ -34,7 +34,7 @@ export default function AddParcel() {
   const onSubmit = (data) => {
     const totalCost = calculateCost(data);
 
-    // STEP 1: Initial confirmation
+    //confirmation
     Swal.fire({
       title: "Confirm Booking?",
       html: `
@@ -48,7 +48,6 @@ export default function AddParcel() {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        // STEP 2: Show detailed breakdown
         Swal.fire({
           title: "Booking Details",
           html: `
@@ -101,7 +100,7 @@ export default function AddParcel() {
           }
         });
       } else {
-        // Cancelled Step 1, do nothing
+        // Cancelled
       }
     });
   };
@@ -114,7 +113,7 @@ export default function AddParcel() {
         onSubmit={handleSubmit(onSubmit)}
         className="card bg-base-100 shadow-xl p-6 space-y-6"
       >
-        {/* Parcel Type */}
+        {/* Parcel..*/}
         <div>
           <h3 className="font-semibold mb-2">Parcel Type</h3>
           <div className="flex gap-6">
@@ -139,7 +138,7 @@ export default function AddParcel() {
           </div>
         </div>
 
-        {/* Parcel Info */}
+        {/*..info.. */}
         <div className="grid md:grid-cols-2 gap-4">
           <input
             {...register("parcelName", { required: true })}
@@ -158,7 +157,7 @@ export default function AddParcel() {
           />
         </div>
 
-        {/* Sender & Receiver */}
+        {/* ..sender & receiver.. */}
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <h3 className="font-semibold mb-4">Sender Details</h3>
@@ -225,7 +224,7 @@ export default function AddParcel() {
           </div>
         </div>
 
-        {/* Submit */}
+        {/* ..submit.. */}
         <button type="submit" className="btn btn-primary w-full">
           Proceed to Confirm Booking
         </button>

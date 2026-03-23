@@ -1,6 +1,6 @@
 import React from "react";
 
-// Import images
+//images
 import cartoon1 from "../../assets/img/cartoon-1.webp";
 import cartoon2 from "../../assets/img/cartoon-2.webp";
 import cartoon3 from "../../assets/img/cartoon-3.webp";
@@ -46,7 +46,6 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Row 3 */}
       <div className="flex flex-col md:flex-row items-center gap-8">
         <div className="w-full md:w-1/2 flex justify-center">
           <img

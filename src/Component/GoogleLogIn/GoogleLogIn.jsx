@@ -1,12 +1,15 @@
 import React from "react";
 import useAuth from "../Hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export default function GoogleLogIn() {
+  const navigate = useNavigate();
   const { signInWithGoogle } = useAuth();
   const handleGoogle = () => {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
+        navigate("/", { replace: true });
       })
       .catch((error) => {
         console.log(error);

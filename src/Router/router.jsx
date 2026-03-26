@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         Component: MyDashboard,
       },
       {
-        path: "payment/:id",
+        path: "payment/:parcelId",
         Component: Payment,
       },
     ],

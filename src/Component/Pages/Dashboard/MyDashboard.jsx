@@ -39,7 +39,7 @@ export default function MyDashboard() {
       if (result.isConfirmed) {
         // deleted
 
-        fetch(`http://localhost:5000/parcels/${id}`, {
+        fetch(`https://go-deliver-backend.vercel.app/parcels/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

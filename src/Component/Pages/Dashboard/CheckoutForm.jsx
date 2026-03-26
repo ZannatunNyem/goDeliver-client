@@ -32,12 +32,15 @@ export default function CheckoutForm() {
       setError("");
       console.log("payment method", paymentMethod);
 
-      fetch(`http://localhost:5000/parcels/payment/${parcelId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
+      fetch(
+        `https://go-deliver-backend.vercel.app/parcels/payment/${parcelId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      })
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount > 0) {

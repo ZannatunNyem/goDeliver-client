@@ -1,6 +1,6 @@
 import axios from "axios";
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://go-deliver-backend.vercel.app",
 });
 export default function useAxios() {
   return axiosInstance;

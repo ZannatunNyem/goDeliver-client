@@ -10,7 +10,7 @@ export default function Features() {
     },
     {
       icon: <Clock size={40} />,
-      title: "On-Time Service",
+      title: "On Time Service",
       desc: "We value your time with punctual delivery.",
     },
     {
